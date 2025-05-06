@@ -21,7 +21,12 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:3001"],
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://designerlink.onrender.com",
+    "https://designerlink-client.onrender.com"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
