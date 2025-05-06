@@ -31,4 +31,8 @@ app.use(cors({
   credentials: true,
 }));
 
+app.get('/', (req, res) => {
+  res.send('DesignerLink backend is running!');
+});
+
 module.exports = app;
