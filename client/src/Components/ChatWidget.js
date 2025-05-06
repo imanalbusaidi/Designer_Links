@@ -6,6 +6,7 @@ import axios from "axios";
 import { SERVER_URL } from "../config";
 
 const SOCKET_URL = SERVER_URL;
+const notificationSound = new Audio("https://notificationsounds.com/storage/sounds/file-sounds-1151-pristine.mp3"); // Simple notification sound
 
 const ChatWidget = () => {
   const user = useSelector((state) => state.users.user);
@@ -18,7 +19,6 @@ const ChatWidget = () => {
   const [unreadCount, setUnreadCount] = useState(0); // Track unread messages
   const [lastSender, setLastSender] = useState(null); // Track last sender for unread
   const [highlight, setHighlight] = useState(false); // Highlight for new message
-  const [uploading, setUploading] = useState(false);
   // Remove fileInputRef and image upload logic
   // Add refs to track latest open and chatUser
   const openRef = useRef(open);
@@ -39,19 +39,43 @@ const ChatWidget = () => {
     socketRef.current.emit("join", user._id);
     const handleReceiveMessage = (msg) => {
       setMessages((prev) => [...prev, msg]);
-      // Use refs to get latest open/chatUser
       if (!openRef.current || msg.sender !== chatUserRef.current) {
         setUnreadCount((prev) => prev + 1);
         setLastSender(msg.sender);
-        setHighlight(true); // Trigger highlight
-        // Browser notification for new chat
-        if (window.Notification && Notification.permission === "granted") {
-          new Notification("New message from " + (allUsers.find(u => u._id === msg.sender)?.name || "User"), {
-            body: msg.message,
-            icon: "/favicon.ico"
-          });
-        } else if (window.Notification && Notification.permission !== "denied") {
-          Notification.requestPermission();
+        setHighlight(true);
+        // Improved browser notification logic with more debug logs
+        console.log("[ChatWidget] Received message:", msg);
+        if (!openRef.current) {
+          if (window.Notification) {
+            console.log("[ChatWidget] Notification.permission:", Notification.permission);
+            if (Notification.permission === "granted") {
+              new Notification("New message from " + (allUsers.find(u => u._id === msg.sender)?.name || "User"), {
+                body: msg.message,
+                icon: "/favicon.ico"
+              });
+              console.log("[ChatWidget] Notification shown for message:", msg);
+            } else if (Notification.permission !== "denied") {
+              Notification.requestPermission().then(permission => {
+                console.log("[ChatWidget] Notification.requestPermission result:", permission);
+                if (permission === "granted") {
+                  new Notification("New message from " + (allUsers.find(u => u._id === msg.sender)?.name || "User"), {
+                    body: msg.message,
+                    icon: "/favicon.ico"
+                  });
+                  console.log("[ChatWidget] Notification shown after permission granted:", msg);
+                } else {
+                  console.log("[ChatWidget] Notification permission denied after request.");
+                }
+              });
+            } else {
+              console.log("[ChatWidget] Notification permission denied.");
+            }
+          } else {
+            alert("New message: " + msg.message);
+            console.log("[ChatWidget] Browser Notification API not available.");
+          }
+          notificationSound.currentTime = 0;
+          notificationSound.play();
         }
       }
     };
@@ -60,7 +84,7 @@ const ChatWidget = () => {
       socketRef.current.off("receive_message", handleReceiveMessage);
       socketRef.current.disconnect();
     };
-  }, [user]);
+  }, [user, allUsers]);
 
   // Fetch chat history when chatUser changes
   useEffect(() => {
@@ -127,16 +151,21 @@ const ChatWidget = () => {
           <FaComments
             size={38}
             color={highlight ? "#e53935" : "#6a1b9a"}
-            className={highlight ? "chat-highlight" : ""}
-            style={{ cursor: "pointer", boxShadow: "0 2px 8px rgba(0,0,0,0.2)", borderRadius: "50%", background: "#fff", padding: 8 }}
+            style={{
+              cursor: "pointer",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+              borderRadius: "50%",
+              background: "#fff",
+              padding: 8
+            }}
             onClick={handleChatIconClick}
           />
           {unreadCount > 0 && !open && (
             <span
               style={{
                 position: "absolute",
-                top: 2,
-                right: 2,
+                top: 0,
+                right: 0,
                 background: "#e53935",
                 color: "#fff",
                 borderRadius: "50%",
@@ -147,7 +176,7 @@ const ChatWidget = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 fontWeight: "bold",
-                boxShadow: "0 0 4px #fff",
+                border: "2px solid #fff"
               }}
             >
               {unreadCount}

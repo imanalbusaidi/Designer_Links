@@ -1,14 +1,3 @@
-import {
-  Form,
-  Input,
-  FormGroup,
-  Label,
-  Container,
-  Button,
-  Col,
-  Row,
-} from "reactstrap";
-
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +9,9 @@ import { FaUser, FaLock } from "react-icons/fa";
 const Login = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [localError, setLocalError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,12 +21,17 @@ const Login = () => {
   const isError = useSelector((state) => state.users.status === "failed");
   const errorMessage = useSelector((state) => state.users.error);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e && e.preventDefault();
+    setLoading(true);
+    setLocalError("");
     try {
       await dispatch(loginUser({ email, password })).unwrap();
       console.log("Login successful");
     } catch (error) {
-      console.error("Login failed:", error);
+      setLocalError(errorMessage || "Login failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,6 +40,15 @@ const Login = () => {
       navigate("/");
     }
   }, [isSuccess, user, navigate]);
+
+  useEffect(() => {
+    if (isError) setLocalError(errorMessage || "Login failed. Please try again.");
+  }, [isError, errorMessage]);
+
+  // Clear error on input change
+  useEffect(() => {
+    setLocalError("");
+  }, [email, password]);
 
   return (
     <div className="auth-bg" style={{
@@ -129,32 +135,67 @@ const Login = () => {
           text-decoration: underline;
           margin-left: 4px;
         }
+        .show-password-toggle {
+          background: none;
+          border: none;
+          color: #7b2ff2;
+          font-size: 0.95rem;
+          cursor: pointer;
+          margin-left: 8px;
+        }
+        .error {
+          color: #e53935;
+          margin-bottom: 12px;
+        }
       `}</style>
       <div className="auth-form-box">
         <FaUser className="login-icon" />
         <div className="login-header">Login</div>
-        {isError && <p className="error" style={{color:'#e53935', marginBottom:12}}>{errorMessage || "Login failed. Please try again."}</p>}
-        <div className="auth-input-group">
-          <FaUser className="input-icon" />
-          <input
-            type="email"
-            placeholder="Username"
-            value={email}
-            onChange={(e) => setemail(e.target.value)}
-          />
-        </div>
-        <div className="auth-input-group">
-          <FaLock className="input-icon" />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setpassword(e.target.value)}
-          />
-        </div>
-        <button className="auth-btn" onClick={handleLogin}>Login</button>
+        {localError && <p className="error">{localError}</p>}
+        <form onSubmit={handleLogin} style={{width: '100%'}} autoComplete="on">
+          <div className="auth-input-group">
+            <label htmlFor="email" style={{display:'none'}}>Email</label>
+            <FaUser className="input-icon" />
+            <input
+              id="email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
+              required
+              aria-label="Email"
+              autoComplete="email"
+            />
+          </div>
+          <div className="auth-input-group">
+            <label htmlFor="password" style={{display:'none'}}>Password</label>
+            <FaLock className="input-icon" />
+            <input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setpassword(e.target.value)}
+              required
+              aria-label="Password"
+              autoComplete="current-password"
+            />
+            <button
+              type="button"
+              className="show-password-toggle"
+              tabIndex={-1}
+              onClick={() => setShowPassword((prev) => !prev)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
+          <button className="auth-btn" type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
         <div className="auth-bottom-text">
-          Do you have an account?
+        Don't have an account?
           <Link to="/register"> Sign Up</Link>
         </div>
       </div>

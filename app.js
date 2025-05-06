@@ -21,7 +21,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: ["http://localhost:3000", "http://localhost:3001"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));

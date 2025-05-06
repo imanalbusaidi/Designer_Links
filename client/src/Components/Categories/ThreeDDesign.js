@@ -38,7 +38,7 @@ const ThreeDDesign = () => {
   }, [user]);
 
   const handlePost = async () => {
-    if (user.userType !== "designer") {
+    if (!user || user.userType !== "designer") {
       alert("Only designers can share posts.");
       return;
     }
@@ -156,7 +156,7 @@ const ThreeDDesign = () => {
   return (
     <div className="category-page">
       <h1>3D Design</h1>
-      {user.userType === "designer" && (
+      {user && user.userType === "designer" && (
         <div className="share-post">
           <textarea
             placeholder="What's on your mind?"
