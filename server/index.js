@@ -17,7 +17,12 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:3000", "https://designerlink-client.onrender.com"],
+  origin: [
+    "http://localhost:3000",
+    "https://designerlink-client.onrender.com",
+    "https://designerlink.onrender.com",
+    "https://designerlink-server.onrender.com"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
@@ -556,7 +561,12 @@ createAdminAccount();
 const server = http.createServer(app);
 const io = new SocketIOServer(server, {
   cors: {
-    origin: ["http://localhost:3000", "https://designerlink-client.onrender.com"],
+    origin: [
+      "http://localhost:3000",
+      "https://designerlink-client.onrender.com",
+      "https://designerlink.onrender.com",
+      "https://designerlink-server.onrender.com"
+    ],
     methods: ["GET", "POST"],
     credentials: true,
   },
