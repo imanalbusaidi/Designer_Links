@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+{/*
+import React, { useEffect, useRef, useState } from "react"; 
 import { useSelector } from "react-redux";
 import { FaComments } from "react-icons/fa";
 import io from "socket.io-client";
@@ -138,7 +139,7 @@ const ChatWidget = () => {
 
   return (
     <>
-      {/* Floating chat icon */}
+      / Floating chat icon 
       <div
         style={{
           position: "fixed",
@@ -184,7 +185,7 @@ const ChatWidget = () => {
           )}
         </div>
       </div>
-      {/* Chatbox */}
+      / Chatbox 
       {open && (
         <div
           style={{
@@ -241,7 +242,7 @@ const ChatWidget = () => {
                   }}
                 >
                   {msg.message}
-                  {/* Remove image rendering */}
+                  / Remove image rendering 
                 </span>
                 <div style={{ fontSize: 10, color: "#888" }}>
                   {msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString() : ""}
@@ -259,7 +260,7 @@ const ChatWidget = () => {
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
               disabled={!chatUser}
             />
-            {/* Remove file input and upload button */}
+            /Remove file input and upload button 
             <button
               onClick={handleSend}
               style={{ marginLeft: 8, background: "#6a1b9a", color: "#fff", border: "none", borderRadius: 6, padding: "0 16px" }}
@@ -275,3 +276,5 @@ const ChatWidget = () => {
 };
 
 export default ChatWidget;
+
+*/}

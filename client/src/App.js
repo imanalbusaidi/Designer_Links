@@ -70,7 +70,7 @@ const App = () => {
         </Routes>
       </Row>
       <Footer />
-      <ChatWidget />
+      {/*<ChatWidget /> */}
     </Container>
   );
 };
