@@ -2,8 +2,11 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
-        <p className="footer-logo">&copy; {new Date().getFullYear()} <span>DesignerLink</span></p>
-        <p className="footer-slogan">Empowering Designers, Connecting Opportunities.</p>
+        <div className="footer-logo">DesignerLink <span>Platform</span></div>
+        <div className="footer-slogan">
+          Empowering Creativity. Connecting Visionaries.<br />
+          <span style={{fontWeight:600, color:'#ffd54f'}}>Where Designers & Clients Meet.</span>
+        </div>
         <div className="footer-links">
           <a href="/privacy-policy">Privacy Policy</a>
           <a href="/terms-of-service">Terms of Service</a>
@@ -13,6 +16,9 @@ const Footer = () => {
           <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
           <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+        <div className="footer-credits">
+          &copy; {new Date().getFullYear()} DesignerLink. Crafted with passion for the creative community.
         </div>
       </div>
     </footer>

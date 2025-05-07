@@ -56,13 +56,9 @@ const Header = () => {
   }
 
   return (
-    <Navbar className="header">
+    <Navbar color="light" light expand="md" className="header">
+      <Link to="/" className="logo-text">DesignerLink</Link>
       <Nav>
-        <NavItem>
-          <Link to="/" className="logo-text">
-            DesignerLink
-          </Link>
-        </NavItem>
         <NavItem>
           <NavLink tag={Link} to="/" className="nav-link">Home</NavLink>
         </NavItem>

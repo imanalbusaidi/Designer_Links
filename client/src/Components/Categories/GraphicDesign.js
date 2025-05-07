@@ -87,74 +87,95 @@ const GraphicDesign = () => {
   );
 
   const postStyle = {
-    border: "1px solid #d1d9e6", // Subtle border
-    borderRadius: "12px",
-    padding: "20px",
-    margin: "15px 0",
-    background: "linear-gradient(135deg, #f0f4ff, #dce6f9)", // Soft gradient
-    boxShadow: "0 6px 15px rgba(0, 0, 0, 0.1)", // Soft shadow
-    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-    maxWidth: "450px",
+    background: "#fff",
+    borderRadius: "18px",
+    boxShadow: "0 4px 24px rgba(106,27,154,0.10)",
+    padding: "28px 20px 20px 20px",
+    margin: "18px 0",
+    maxWidth: "420px",
     textAlign: "center",
+    transition: "transform 0.25s, box-shadow 0.25s",
+    border: "1.5px solid #ece6f7",
+    position: "relative",
     overflow: "hidden",
   };
 
   const postTitleStyle = {
-    fontSize: "20px",
-    fontWeight: "600",
-    color: "#2c3e50", // Darker text color
-    marginBottom: "12px",
+    fontSize: "22px",
+    fontWeight: "700",
+    color: "#6a1b9a",
+    marginBottom: "14px",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
     overflow: "hidden",
+    letterSpacing: "0.5px",
   };
 
   const postImageStyle = {
     width: "100%",
-    maxHeight: "300px",
+    maxHeight: "260px",
     objectFit: "cover",
-    borderRadius: "10px",
-    marginBottom: "12px",
+    borderRadius: "12px",
+    marginBottom: "14px",
+    boxShadow: "0 2px 12px #6a1b9a11",
   };
 
   const postFooterStyle = {
-    fontSize: "14px",
-    color: "#7f8c8d", // Muted text color
-    marginTop: "10px",
+    fontSize: "15px",
+    color: "#7f8c8d",
+    marginTop: "12px",
+    fontStyle: "italic",
   };
 
   const textareaStyle = {
     width: "100%",
     height: "80px",
-    borderRadius: "8px",
-    border: "1px solid #ccc",
-    padding: "10px",
+    borderRadius: "10px",
+    border: "1.5px solid #d1d9e6",
+    padding: "12px",
     fontSize: "16px",
     fontFamily: "Arial, sans-serif",
-    marginBottom: "10px",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+    marginBottom: "12px",
+    boxShadow: "0 2px 8px #6a1b9a08",
+    resize: "vertical",
+    background: "#fafaff",
+    outline: "none",
+    transition: "border 0.2s",
   };
 
   const fileInputStyle = {
     display: "block",
-    margin: "10px 0",
-    fontSize: "16px",
+    margin: "10px 0 18px 0",
+    fontSize: "15px",
     fontFamily: "Arial, sans-serif",
+    border: "1.5px solid #ece6f7",
+    borderRadius: "8px",
+    padding: "7px 12px",
+    background: "#f3f0fa",
+    color: "#6a1b9a",
+    cursor: "pointer",
+    outline: "none",
+    transition: "border 0.2s",
   };
 
   const buttonStyle = {
-    backgroundColor: "#007BFF", // Blue color
-    color: "white",
+    background: "linear-gradient(90deg, #6a1b9a, #8e24aa)",
+    color: "#fff",
     border: "none",
-    padding: "10px 20px",
-    borderRadius: "5px",
+    padding: "12px 32px",
+    borderRadius: "24px",
+    fontWeight: "600",
+    fontSize: "1.08rem",
+    boxShadow: "0 2px 8px #6a1b9a22",
     cursor: "pointer",
-    fontSize: "16px",
-    transition: "background-color 0.3s ease",
+    marginTop: "4px",
+    marginBottom: "8px",
+    transition: "background 0.2s, transform 0.2s",
+    outline: "none",
   };
 
   const buttonHoverStyle = {
-    backgroundColor: "#0056b3", // Darker blue on hover
+    background: "linear-gradient(90deg, #4a116a, #6a1b9a)",
   };
 
   return (

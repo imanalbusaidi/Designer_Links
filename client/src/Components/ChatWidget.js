@@ -1,4 +1,4 @@
-{/*
+// Import necessary libraries and hooks
 import React, { useEffect, useRef, useState } from "react"; 
 import { useSelector } from "react-redux";
 import { FaComments } from "react-icons/fa";
@@ -6,11 +6,13 @@ import io from "socket.io-client";
 import axios from "axios";
 import { SERVER_URL } from "../config";
 
+// Set up socket URL
 const SOCKET_URL = SERVER_URL;
-const notificationSound = new Audio("https://notificationsounds.com/storage/sounds/file-sounds-1151-pristine.mp3"); // Simple notification sound
 
 const ChatWidget = () => {
+  // Get current user from Redux store
   const user = useSelector((state) => state.users.user);
+  // State for chat open/close, message input, chat history, selected chat user, etc.
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -20,11 +22,13 @@ const ChatWidget = () => {
   const [unreadCount, setUnreadCount] = useState(0); // Track unread messages
   const [lastSender, setLastSender] = useState(null); // Track last sender for unread
   const [highlight, setHighlight] = useState(false); // Highlight for new message
+  const notificationSound = useRef(null);
   // Remove fileInputRef and image upload logic
   // Add refs to track latest open and chatUser
   const openRef = useRef(open);
   const chatUserRef = useRef(chatUser);
 
+  // Keep refs in sync with state
   useEffect(() => {
     openRef.current = open;
     if (open) setHighlight(false); // Remove highlight when chat is opened
@@ -33,18 +37,28 @@ const ChatWidget = () => {
     chatUserRef.current = chatUser;
   }, [chatUser]);
 
-  // Connect to socket and join room (register event handler only once)
+  // Notification sound setup
+  useEffect(() => {
+    // Use a valid audio file (wav/mp3/ogg) in public folder
+    notificationSound.current = new Audio("/notification.mp3");
+    notificationSound.current.onerror = (e) => {
+      console.warn("Notification sound failed to load or is not supported.", e);
+    };
+  }, []);
+
+  // Connect to socket and handle incoming messages
   useEffect(() => {
     if (!user) return;
     socketRef.current = io(SOCKET_URL);
     socketRef.current.emit("join", user._id);
+    // Handle receiving a message
     const handleReceiveMessage = (msg) => {
       setMessages((prev) => [...prev, msg]);
       if (!openRef.current || msg.sender !== chatUserRef.current) {
         setUnreadCount((prev) => prev + 1);
         setLastSender(msg.sender);
         setHighlight(true);
-        // Improved browser notification logic with more debug logs
+        // Show browser notification if chat is closed
         console.log("[ChatWidget] Received message:", msg);
         if (!openRef.current) {
           if (window.Notification) {
@@ -75,8 +89,13 @@ const ChatWidget = () => {
             alert("New message: " + msg.message);
             console.log("[ChatWidget] Browser Notification API not available.");
           }
-          notificationSound.currentTime = 0;
-          notificationSound.play();
+          // Play notification sound only if loaded
+          if (notificationSound.current && notificationSound.current.readyState > 0) {
+            notificationSound.current.currentTime = 0;
+            notificationSound.current.play().catch((err) => {
+              console.warn("Notification sound play error:", err);
+            });
+          }
         }
       }
     };
@@ -99,7 +118,7 @@ const ChatWidget = () => {
     fetchMessages();
   }, [user, chatUser]);
 
-  // For demo: show a dropdown to select a chat user (designer or customer)
+  // Fetch all users for chat dropdown
   useEffect(() => {
     if (!user) return;
     axios.get(`${SERVER_URL}/getAllUsers`).then((res) => {
@@ -115,6 +134,7 @@ const ChatWidget = () => {
   // If user is not logged in, do not render the chat widget
   if (!user) return null;
 
+  // Send a chat message
   const handleSend = async () => {
     if (!message.trim() || !chatUser) return;
     const msg = {
@@ -128,6 +148,7 @@ const ChatWidget = () => {
     setMessage("");
   };
 
+  // Handle chat icon click (open chat or jump to sender)
   const handleChatIconClick = () => {
     if (unreadCount > 0 && lastSender) {
       setChatUser(lastSender);
@@ -139,7 +160,7 @@ const ChatWidget = () => {
 
   return (
     <>
-      / Floating chat icon 
+      {/* Floating chat icon */}
       <div
         style={{
           position: "fixed",
@@ -152,6 +173,7 @@ const ChatWidget = () => {
           <FaComments
             size={38}
             color={highlight ? "#e53935" : "#6a1b9a"}
+            className={highlight ? "chat-highlight" : ""}
             style={{
               cursor: "pointer",
               boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
@@ -163,29 +185,14 @@ const ChatWidget = () => {
           />
           {unreadCount > 0 && !open && (
             <span
-              style={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                background: "#e53935",
-                color: "#fff",
-                borderRadius: "50%",
-                width: 18,
-                height: 18,
-                fontSize: 12,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: "bold",
-                border: "2px solid #fff"
-              }}
+              className="chat-notification-badge"
             >
               {unreadCount}
             </span>
           )}
         </div>
       </div>
-      / Chatbox 
+      {/* Chatbox UI */}
       {open && (
         <div
           style={{
@@ -203,10 +210,12 @@ const ChatWidget = () => {
             height: 400,
           }}
         >
+          {/* Chat header */}
           <div style={{ padding: 10, borderBottom: "1px solid #eee", fontWeight: "bold", background: "#f7f7f7" }}>
             Live Chat
             <span style={{ float: "right", cursor: "pointer" }} onClick={() => setOpen(false)}>&times;</span>
           </div>
+          {/* User select dropdown */}
           <div style={{ padding: 10, borderBottom: "1px solid #eee" }}>
             <select
               value={chatUser}
@@ -221,6 +230,7 @@ const ChatWidget = () => {
               ))}
             </select>
           </div>
+          {/* Chat messages */}
           <div style={{ flex: 1, overflowY: "auto", padding: 10, background: "#fafaff" }}>
             {messages.map((msg, idx) => (
               <div
@@ -242,7 +252,7 @@ const ChatWidget = () => {
                   }}
                 >
                   {msg.message}
-                  / Remove image rendering 
+                  {/* Remove image rendering */}
                 </span>
                 <div style={{ fontSize: 10, color: "#888" }}>
                   {msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString() : ""}
@@ -250,6 +260,7 @@ const ChatWidget = () => {
               </div>
             ))}
           </div>
+          {/* Message input and send button */}
           <div style={{ display: "flex", borderTop: "1px solid #eee", padding: 8, alignItems: "center" }}>
             <input
               type="text"
@@ -260,7 +271,7 @@ const ChatWidget = () => {
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
               disabled={!chatUser}
             />
-            /Remove file input and upload button 
+            {/* Remove file input and upload button */}
             <button
               onClick={handleSend}
               style={{ marginLeft: 8, background: "#6a1b9a", color: "#fff", border: "none", borderRadius: 6, padding: "0 16px" }}
@@ -276,5 +287,3 @@ const ChatWidget = () => {
 };
 
 export default ChatWidget;
-
-*/}

@@ -7,20 +7,74 @@ import { SERVER_URL } from "../config";
 import { FaHeart } from "react-icons/fa";
 
 const titleStyle = {
-  color: "#FF4500", // Vibrant orange-red color
-  fontFamily: "'Montserrat', sans-serif", // Modern and cool font
-  fontSize: "32px", // Slightly larger font size
-  fontWeight: "700", // Extra bold for emphasis
-  padding: "25px 0", // Add more padding
-  textAlign: "center", // Center align the text
-  textTransform: "uppercase", // Make the text uppercase
-  letterSpacing: "2px", // Add spacing between letters
+  fontFamily: "Montserrat, Arial, sans-serif",
+  fontSize: "2.2rem",
+  fontWeight: 700,
+  margin: "30px 0 20px 0",
+  textAlign: "center"
 };
 
 const postFooterStyle = {
   fontSize: "14px",
   color: "#7f8c8d",
   marginTop: "10px",
+};
+
+const cardStyle = {
+  background: "#fff",
+  borderRadius: "18px",
+  boxShadow: "0 4px 24px rgba(106,27,154,0.10)",
+  padding: "24px 18px 18px 18px",
+  margin: "18px 0",
+  maxWidth: "420px",
+  textAlign: "center",
+  transition: "transform 0.25s, box-shadow 0.25s",
+  border: "1.5px solid #ece6f7",
+  position: "relative",
+  overflow: "hidden",
+};
+
+const cardImageStyle = {
+  width: "100%",
+  maxHeight: "220px",
+  objectFit: "cover",
+  marginBottom: "14px",
+  boxShadow: "0 2px 12px #6a1b9a11",
+  cursor: "pointer",
+};
+
+const cardTitleStyle = {
+  fontSize: "22px",
+  fontWeight: "700",
+  color: "#6a1b9a",
+  marginBottom: "10px",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  letterSpacing: "0.5px",
+};
+
+const cardCategoryStyle = {
+  fontSize: "15px",
+  color: "#8e24aa",
+  fontWeight: 500,
+  marginBottom: "8px",
+};
+
+const deleteButtonStyle = {
+  background: "linear-gradient(90deg,rgb(198, 35, 35),rgb(203, 87, 87))",
+  color: "#fff",
+  border: "none",
+  padding: "10px 28px",
+  borderRadius: "20px",
+  fontWeight: "600",
+  fontSize: "1rem",
+  boxShadow: "0 2px 8px #e5393522",
+  cursor: "pointer",
+  marginTop: "8px",
+  marginBottom: "4px",
+  transition: "background 0.2s, transform 0.2s",
+  outline: "none",
 };
 
 const Profile = () => {
@@ -95,19 +149,18 @@ const Profile = () => {
         {userPosts.length > 0 ? (
           userPosts.map((post, index) => (
             <Col md="4" className="mb-4" key={index}>
-              <Card>
+              <Card style={cardStyle}>
                 {post.image && (
                   <img
                     src={`${SERVER_URL}/uploads/${post.image}`}
                     alt="Post"
-                    className="card-img-top"
-                    onClick={() => handleViewProfile(post.email)} // Link to designer's profile
-                    style={{ cursor: user.userType === "customer" ? "pointer" : "default" }}
+                    style={cardImageStyle}
+                    onClick={() => handleViewProfile(post.email)}
                   />
                 )}
                 <CardBody>
-                  <CardTitle tag="h5">{post.postMsg}</CardTitle>
-                  <CardText>{post.category}</CardText>
+                  <CardTitle tag="h5" style={cardTitleStyle}>{post.postMsg}</CardTitle>
+                  <CardText style={cardCategoryStyle}>{post.category}</CardText>
                   <p style={postFooterStyle}>Posted by: {post.userName} ({post.email})</p>
                   {user && user.userType === "customer" && (
                     <span style={{ display: 'inline-flex', alignItems: 'center', marginTop: 8 }}>
@@ -121,8 +174,7 @@ const Profile = () => {
                   )}
                   {user.userType === "designer" && (
                     <Button
-                      color="danger"
-                      className="mt-2"
+                      style={deleteButtonStyle}
                       onClick={() => handleDeletePost(post._id)}
                     >
                       Delete

@@ -49,7 +49,7 @@ const App = () => {
     <Container fluid>
       <Header />
       <div style={{ position: "fixed", top: 30, right: 30, zIndex: 9999, minWidth: 350 }}>
-        <Toast isOpen={toast.show} timeout={3000} fade={true} style={{ border: `2px solid #6a1b9a`, borderRadius: 16, boxShadow: "0 4px 16px rgba(106,27,154,0.18)" }}>
+        <Toast isOpen={toast.show} timeout={300} fade={true} style={{ border: `2px solid #6a1b9a`, borderRadius: 16, boxShadow: "0 4px 16px rgba(106,27,154,0.18)" }}>
           <ToastHeader icon={toast.color}>DesignerLink</ToastHeader>
           <ToastBody style={{ color: "#6a1b9a", fontWeight: "bold", fontSize: 18 }}>{toast.message}</ToastBody>
         </Toast>
@@ -70,7 +70,7 @@ const App = () => {
         </Routes>
       </Row>
       <Footer />
-      {/*<ChatWidget /> */}
+      <ChatWidget />
     </Container>
   );
 };
