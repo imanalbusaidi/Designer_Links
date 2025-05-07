@@ -30,7 +30,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "vitest",
+    "test": "react-scripts test",
     "test:ui": "vitest --ui",
     "eject": "react-scripts eject"
   },
