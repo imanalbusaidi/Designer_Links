@@ -40,7 +40,7 @@ const ChatWidget = () => {
   // Notification sound setup
   useEffect(() => {
     // Use a valid audio file (wav/mp3/ogg) in public folder
-    notificationSound.current = new Audio("/notification.mp3");
+    notificationSound.current = new Audio(process.env.PUBLIC_URL + "/notification.wav");
     notificationSound.current.onerror = (e) => {
       console.warn("Notification sound failed to load or is not supported.", e);
     };
