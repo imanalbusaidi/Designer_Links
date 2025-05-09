@@ -31,7 +31,6 @@ const Register = () => {
       };
 
       await dispatch(registerUser(userData)).unwrap();
-      alert("Registration successful. Please log in.");
       navigate("/login");
     } catch (error) {
       setErrorMessage("Registration failed. Please try again.");

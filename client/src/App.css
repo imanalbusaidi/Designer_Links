@@ -406,7 +406,7 @@ body {
 /* Homepage Styles */
 .homepage {
   padding: 40px 20px;
-  font-family: "Poppins", "Arial", sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif !important;
   color: #2d2d2d;
   background: #fafcff;
 }
@@ -420,6 +420,7 @@ body {
   margin-bottom: 50px;
   flex-wrap: wrap;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .hero-image {
@@ -432,6 +433,7 @@ body {
 .hero-text {
   flex: 1;
   min-width: 260px;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .hero-text h1 {
@@ -462,7 +464,7 @@ body {
   background: linear-gradient(90deg, #8e24aa, #3949ab);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-family: 'Playfair Display', 'Montserrat', 'Poppins', serif;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .steps {
@@ -470,6 +472,7 @@ body {
   justify-content: center;
   gap: 50px;
   flex-wrap: wrap;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .step {
@@ -479,6 +482,7 @@ body {
   border-radius: 16px;
   box-shadow: 0 6px 18px rgba(63, 81, 181, 0.15);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .step:hover {
@@ -494,11 +498,13 @@ body {
 .step h3 {
   color: #5e35b1;
   margin-bottom: 12px;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .step p {
   font-size: 15px;
   color: #666;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .about-section {
@@ -519,6 +525,7 @@ body {
   border-radius: 20px;
   box-shadow: 0 8px 60px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .about-image {
@@ -532,10 +539,11 @@ body {
 .about-text {
   flex: 1;
   min-width: 260px;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .about-text h3 {
-  font-family: 'Playfair Display', 'Montserrat', 'Poppins', serif;
+  font-family: 'Montserrat', Arial, sans-serif !important;
   font-size: 2.2rem;
   font-weight: 700;
   color: #ff8a00;
@@ -548,6 +556,7 @@ body {
   font-size: 17px;
   color: #333;
   line-height: 1.6;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .about-text p::before {
@@ -557,6 +566,7 @@ body {
 .categories {
   text-align: center;
   margin: 50px 0;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .categories h2 {
@@ -570,6 +580,7 @@ body {
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .category-badge {
@@ -749,6 +760,7 @@ body {
   background: linear-gradient(120deg, #f8fafc 0%, #e3e0ff 100%);
   min-height: 100vh;
   padding-bottom: 40px;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-hero {
@@ -762,6 +774,7 @@ body {
   align-items: center;
   gap: 40px;
   flex-wrap: wrap;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-hero-image {
@@ -774,6 +787,7 @@ body {
 .enhanced-hero-text {
   flex: 1;
   min-width: 260px;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-title {
@@ -782,7 +796,7 @@ body {
   color: #6a1b9a;
   margin-bottom: 10px;
   letter-spacing: 1.5px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-subtitle {
@@ -790,14 +804,14 @@ body {
   color: #00897b;
   margin-bottom: 10px;
   font-weight: 600;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-description {
   font-size: 1.15rem;
   color: #444;
   margin-bottom: 18px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .cta-btn {
@@ -828,6 +842,7 @@ body {
   justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-step {
@@ -839,6 +854,7 @@ body {
   min-width: 220px;
   text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 .enhanced-step:hover {
   transform: translateY(-6px) scale(1.04);
@@ -851,11 +867,13 @@ body {
 .enhanced-step h3 {
   color: #6a1b9a;
   margin-bottom: 10px;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-categories {
   margin: 60px auto 40px auto;
   max-width: 1200px;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-category-badges {
@@ -863,6 +881,7 @@ body {
   justify-content: center;
   gap: 24px;
   flex-wrap: wrap;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 .category-badge {
   font-size: 1.15rem;
@@ -890,6 +909,7 @@ body {
   align-items: center;
   gap: 40px;
   flex-wrap: wrap;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 .enhanced-about-image {
   width: 220px;
@@ -900,9 +920,10 @@ body {
 .enhanced-about-text {
   flex: 1;
   min-width: 260px;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 .enhanced-about-text h3 {
-  font-family: 'Playfair Display', 'Montserrat', 'Poppins', serif;
+  font-family: 'Montserrat', Arial, sans-serif !important;
   font-size: 2.2rem;
   font-weight: 700;
   color: #ff8a00;
@@ -914,6 +935,7 @@ body {
   font-size: 1.1rem;
   color: #333;
   line-height: 1.6;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-how-title {
@@ -921,7 +943,7 @@ body {
   font-weight: 700;
   color: #6a1b9a;
   margin-bottom: 32px;
-  font-family: 'Playfair Display', 'Montserrat', 'Poppins', serif;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-step-title {
@@ -929,7 +951,7 @@ body {
   font-weight: 600;
   color: #00897b;
   margin-bottom: 8px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-step-label {
@@ -937,13 +959,13 @@ body {
   font-weight: 500;
   color: #6a1b9a;
   margin-bottom: 6px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-step-desc {
   font-size: 1rem;
   color: #444;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif !important;
 }
 
 .enhanced-categories-title {
@@ -951,7 +973,72 @@ body {
   font-weight: 700;
   color: #3949ab;
   margin-bottom: 24px;
+  font-family: 'Montserrat', Arial, sans-serif !important;
+}
+
+/* Contact Page Styles */
+.contact-container {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(106,27,154,0.10);
+  max-width: 480px;
+  margin: 48px auto 48px auto;
+  padding: 40px 32px 32px 32px;
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+}
+.contact-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #6a1b9a;
+  margin-bottom: 24px;
+  text-align: center;
   font-family: 'Montserrat', sans-serif;
+}
+.contact-form label {
+  font-weight: 600;
+  color: #3949ab;
+  margin-bottom: 6px;
+  font-size: 1.08rem;
+}
+.contact-form .form-group {
+  margin-bottom: 18px;
+}
+.contact-form input,
+.contact-form textarea {
+  border-radius: 10px;
+  border: 1.5px solid #d1d9e6;
+  padding: 12px;
+  font-size: 1rem;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: #fafaff;
+  transition: border 0.2s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #6a1b9a;
+  outline: none;
+}
+.contact-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #8e24aa 0%, #ff8a00 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.12rem;
+  padding: 14px 0;
+  border-radius: 28px;
+  border: none;
+  box-shadow: 0 4px 16px #8e24aa22;
+  margin-top: 14px;
+  letter-spacing: 1px;
+  transition: background 0.25s, transform 0.18s, box-shadow 0.18s;
+}
+.contact-btn:hover {
+  background: linear-gradient(90deg, #ff8a00 0%, #8e24aa 100%);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 28px #8e24aa33;
+}
+.contact-alert {
+  margin-bottom: 18px;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button, Alert } from "reactstrap";
+import { Container, Form, FormGroup, Label, Input, Button, Alert } from "reactstrap";
 import { SERVER_URL } from "../config";
 
 const Contact = () => {
@@ -46,12 +46,12 @@ const Contact = () => {
   }
 
   return (
-    <Container>
-      <h1 className="text-center my-4">Request to Become a Designer</h1>
-      {error && <Alert color="danger">{error}</Alert>}
-      {successMessage && <Alert color="success">{successMessage}</Alert>}
-      <Form onSubmit={handleSubmit}>
-        <FormGroup>
+    <div className="contact-container">
+      <div className="contact-title">Request to Become a Designer</div>
+      {error && <Alert color="danger" className="contact-alert">{error}</Alert>}
+      {successMessage && <Alert color="success" className="contact-alert">{successMessage}</Alert>}
+      <Form onSubmit={handleSubmit} className="contact-form">
+        <FormGroup className="form-group">
           <Label for="name">Name</Label>
           <Input
             type="text"
@@ -63,7 +63,7 @@ const Contact = () => {
             disabled={!!user?.name}
           />
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="form-group">
           <Label for="email">Email</Label>
           <Input
             type="email"
@@ -75,7 +75,7 @@ const Contact = () => {
             disabled={!!user?.email}
           />
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="form-group">
           <Label for="portfolio">Portfolio (optional)</Label>
           <Input
             type="url"
@@ -86,7 +86,7 @@ const Contact = () => {
             placeholder="https://your-portfolio.com"
           />
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="form-group">
           <Label for="message">Why do you want to become a designer?</Label>
           <Input
             type="textarea"
@@ -95,13 +95,14 @@ const Contact = () => {
             value={formData.message}
             onChange={handleChange}
             required
+            style={{ minHeight: 90 }}
           />
         </FormGroup>
-        <Button color="primary" type="submit">
+        <Button color="primary" type="submit" className="contact-btn">
           Submit Request
         </Button>
       </Form>
-    </Container>
+    </div>
   );
 };
 
